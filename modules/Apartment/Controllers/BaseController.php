@@ -1,7 +1,12 @@
 <?php
 
-namespace App\Controllers;
+namespace Modules\Apartment\Controllers;
+date_default_timezone_set('Asia/Ho_Chi_Minh');
 
+use App\Libraries\LibApartment;
+use App\Models\GhApartment;
+use App\Models\GhMedia;
+use App\Models\GhRoom;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -35,7 +40,11 @@ abstract class BaseController extends Controller
      *
      * @var array
      */
-    protected $helpers = [];
+    protected $helpers = ['html','url','form'];
+    protected LibApartment $LibApartment;
+    protected GhApartment $GhApartment;
+    protected GhRoom $GhRoom;
+    protected GhMedia $GhMedia;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -50,9 +59,13 @@ abstract class BaseController extends Controller
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
-
         // Preload any models, libraries, etc, here.
 
         // E.g.: $this->session = \Config\Services::session();
+
+        $this->LibApartment = new LibApartment();
+        $this->GhApartment = new GhApartment();
+        $this->GhRoom = new GhRoom();
+        $this->GhMedia = new GhMedia();
     }
 }

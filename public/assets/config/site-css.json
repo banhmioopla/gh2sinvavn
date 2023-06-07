@@ -1,0 +1,124 @@
+[
+    {
+        "href": "vendor/fonts/fontawesome.css",
+        "class": null
+    },
+    {
+        "href": "vendor/fonts/tabler-icons1.76.0.css",
+        "class": null
+    },
+    {
+        "href": "https://cdn.jsdelivr.net/npm/@tabler/icons@latest/iconfont/tabler-icons.min.css",
+        "class": null
+    },
+    {
+        "href": "vendor/fonts/flag-icons.css",
+        "class": null
+    },
+    {
+        "href": "vendor/css/rtl/core.css",
+        "class": "template-customizer-core-css"
+    },
+    {
+        "href": "vendor/css/rtl/theme-default.css",
+        "class": null
+    },
+    {
+        "href": "css/demo.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/perfect-scrollbar/perfect-scrollbar.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/node-waves/node-waves.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/typeahead-js/typeahead.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/jstree/jstree.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/bootstrap-select/bootstrap-select.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/fullcalendar/fullcalendar.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/flatpickr/flatpickr.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/toastr/toastr.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/animate-css/animate.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/bs-stepper/bs-stepper.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/quill/typography.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/quill/editor.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/quill/katex.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/sweetalert2/sweetalert2.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/swiper/swiper.css",
+        "class": null
+    },
+
+    {
+        "href": "vendor/libs/bootstrap-maxlength/bootstrap-maxlength.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/datatables-bs5/datatables.bootstrap5.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/datatables-responsive-bs5/responsive.bootstrap5.css",
+        "class": null
+    },
+    {
+        "href": "vendor/libs/select2/select2.css",
+        "class": null
+    },
+    {
+        "href": "vendor/css/pages/page-pricing.css",
+        "class": null
+    },
+    {
+        "href": "vendor/css/pages/page-faq.css",
+        "class": null
+    },
+    {
+        "href": "vendor/css/pages/ui-carousel.css",
+        "class": null
+    },
+    {
+        "href": "vendor/css/pages/app-calendar.css",
+        "class": null
+    }
+
+]

@@ -4,7 +4,6 @@ namespace Config;
 
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
-
 /*
  * --------------------------------------------------------------------
  * Router Setup
@@ -46,4 +45,25 @@ $routes->get('/', 'Home::index');
  */
 if (is_file(APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php')) {
     require APPPATH . 'Config/' . ENVIRONMENT . '/Routes.php';
+}
+
+if(file_exists(ROOTPATH . 'modules')){
+    $modulesPath = ROOTPATH . 'modules/';
+    $modules = scandir($modulesPath);
+
+    foreach ($modules as $m) {
+        if($m === "." || $m === "..") continue;
+
+        if(is_dir($modulesPath) . '/' .$m){
+            $routesPath = $modulesPath . $m . "/Config/Routes.php";
+
+            if(file_exists($routesPath)){
+                require $routesPath;
+            } else {
+                continue;
+            }
+
+        }
+    }
+
 }
