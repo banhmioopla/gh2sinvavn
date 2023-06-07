@@ -112,14 +112,7 @@ class Downloader extends BaseController
             ]);
         }
 
-//        $files =  $this->getFilesFromRoomId($room_id);
-        $files = [
-            (object)['name' => '1-apartment-287-1623046530.jpg'],
-            (object)['name' => '10616-apartment-279-1664906926.png'],
-            (object)['name' => '10623-apartment-88-1664941059.png'],
-            (object)['name' => '10619-apartment-279-1664906926.png'],
-            (object)['name' => '10617-apartment-279-1664906926.png'],
-        ];
+        $files =  $this->getFilesFromRoomId($room_id);
 
         if(empty($files)){
             return $this->response->setJSON([
