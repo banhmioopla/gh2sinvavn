@@ -17,7 +17,7 @@
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
-            <?= anchor('/home', "Danh sách tools") ?>
+            <?= anchor(base_url('home'), "Danh sách tools") ?>
         </li>
         <li class="breadcrumb-item active"><?= $breadcrumb ?></li>
     </ol>
