@@ -6,6 +6,8 @@ use Config\Services;
 
 $routes->group('apm', ['namespace' => 'Modules\Apartment\Controllers'], static function ($routes) {
     $routes->get('downloader/preview', 'Downloader::preview');
+    $routes->get('sightseeing', 'Apartment::sightseeing');
+    $routes->get('searching-room', 'Apartment::searchingRoom');
 
     $routes->get('downloader/dropdown-apartment', 'Downloader::dropdownApartment');
     $routes->get('downloader/dropdown-room', 'Downloader::dropdownRoom');

@@ -1,10 +1,11 @@
 <?php
 
-namespace Modules\Apartment\Controllers;
+namespace Modules\Layouts\Controllers;
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 use App\Libraries\LibApartment;
 use App\Models\GhApartment;
+use App\Models\GhDistrict;
 use App\Models\GhMedia;
 use App\Models\GhRoom;
 use CodeIgniter\Controller;
@@ -45,6 +46,7 @@ abstract class BaseController extends Controller
     protected GhApartment $GhApartment;
     protected GhRoom $GhRoom;
     protected GhMedia $GhMedia;
+    protected GhDistrict $GhDistrict;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -59,13 +61,10 @@ abstract class BaseController extends Controller
     {
         // Do Not Edit This Line
         parent::initController($request, $response, $logger);
-        // Preload any models, libraries, etc, here.
-
-        // E.g.: $this->session = \Config\Services::session();
-
         $this->LibApartment = new LibApartment();
         $this->GhApartment = new GhApartment();
         $this->GhRoom = new GhRoom();
         $this->GhMedia = new GhMedia();
+        $this->GhDistrict = new GhDistrict();
     }
 }

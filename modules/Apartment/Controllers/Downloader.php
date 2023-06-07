@@ -4,6 +4,7 @@ namespace Modules\Apartment\Controllers;
 use App\Libraries\LibApartment;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
+use Modules\Layouts\Controllers\BaseController;
 use Psr\Log\LoggerInterface;
 use ZipArchive;
 
@@ -30,7 +31,8 @@ class Downloader extends BaseController
 
 
         return view('\Modules\Apartment\Views\downloader\preview',[
-            'dropdown_district' => $dropdown_district
+            'dropdown_district' => $dropdown_district,
+            'breadcrumb' => 'Tải ảnh phòng',
         ]);
     }
 
@@ -83,7 +85,13 @@ class Downloader extends BaseController
             'id' => 'dropdown-room'
         ]);
 
+        $apartment = $this->GhApartment->getFirstById($apartment_id);
+
         return $this->response->setJSON([
+            'data' => [
+                'apartment' =>$apartment,
+                'list_contract' => [],
+            ],
             'dropdown' => $dropdown,
             'status' => true,
         ]);

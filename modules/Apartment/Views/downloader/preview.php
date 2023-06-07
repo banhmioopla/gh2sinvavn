@@ -1,13 +1,31 @@
 <?php
 /**
  * @var string $dropdown_district
+ * @var string $breadcrumb
  */
 
 ?>
 <?= $this->extend('\Modules\Layouts\Views\base') ?>
 
+<?= $this->section('head_title') ?>
+<?= $breadcrumb ?>
+<?= $this->endSection() ?>
+
+
+
+<?= $this->section('nav_breadcrumb') ?>
+<nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <?= anchor('/home', "Danh sách tools") ?>
+        </li>
+        <li class="breadcrumb-item active"><?= $breadcrumb ?></li>
+    </ol>
+</nav>
+<?= $this->endSection() ?>
+
 <?= $this->section('breadcrumb_text') ?>
-<?= 'Tải ảnh dự án ' ?>
+<?= $breadcrumb ?>
 <?= $this->endSection() ?>
 
 <?= $this->section('main_content') ?>

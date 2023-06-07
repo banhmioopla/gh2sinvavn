@@ -15,8 +15,8 @@ class GhRoom extends Model
         $this->protect(false);
     }
 
-    public function get($where = []){
-        return $this->asObject()->where($where)->findAll();
+    public function get($where = [] , $orderBy = 'id DESC'){
+        return $this->asObject()->orderBy($orderBy)->where($where)->findAll();
     }
 
     public function getFirstById($id){
