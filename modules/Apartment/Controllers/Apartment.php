@@ -94,7 +94,7 @@ class Apartment extends BaseController
 
             $cards .= '<div class="col-xl-3 mb-3">'. view('\Modules\Apartment\Views\apartment\card-room.php',[
                 'title' => mb_strtoupper($room->code),
-                'subtitle' => $apm?->address_street,
+                'subtitle' => $apm?->address_street . ' , phường ' . $apm?->address_ward,
                 'card_text' => $card_text,
                 'card_links' => "",
             ]) . '</div>';
