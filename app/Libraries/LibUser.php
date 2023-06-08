@@ -67,7 +67,7 @@ class LibUser
             break;
         }
 
-        return implode('<i class="ti ti-arrow-narrow-right mx-2"></i>', count($progress) > 4 ? array_splice($progress, -4)  : $progress);
+        return implode('<i class="ti ti-chevrons-right mx-2"></i>', count($progress) > 4 ? array_splice($progress, -4)  : $progress);
     }
 
     public function renderContractTable($account_id):string{
