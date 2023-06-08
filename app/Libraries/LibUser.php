@@ -55,6 +55,7 @@ class LibUser
             } else {
                 $progress []= '<span class="fw-bold"><span class="badge badge-dot bg-secondary me-1"></span> '.$item.'</span>';
             }
+            break;
         }
 
         return implode('<i class="ti ti-arrow-narrow-right mx-2"></i>', $progress);
