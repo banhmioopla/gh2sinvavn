@@ -60,7 +60,7 @@ class LibUser
             }
 
             if($item < 100){
-                $progress[]= '<span class="fw-bold"><span class="badge badge-dot bg-secondary me-1"></span> '.$item.'</span>';
+                $progress[]= '<span class="badge badge-center rounded-pill bg-secondary">'.$item.'</span>';
             } else {
                 $progress []= '<span class="fw-bold align-middle h4"><span class="badge badge-dot bg-secondary me-1"></span> '.$item.'</span>';
             }
