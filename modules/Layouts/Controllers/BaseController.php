@@ -7,7 +7,9 @@ use App\Libraries\LibApartment;
 use App\Models\GhApartment;
 use App\Models\GhDistrict;
 use App\Models\GhMedia;
+use App\Models\GhContract;
 use App\Models\GhRoom;
+use App\Models\GhUser;
 use CodeIgniter\Controller;
 use CodeIgniter\HTTP\CLIRequest;
 use CodeIgniter\HTTP\IncomingRequest;
@@ -47,6 +49,8 @@ abstract class BaseController extends Controller
     protected GhRoom $GhRoom;
     protected GhMedia $GhMedia;
     protected GhDistrict $GhDistrict;
+    protected GhContract $GhContract;
+    protected GhUser $GhUser;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -66,5 +70,7 @@ abstract class BaseController extends Controller
         $this->GhRoom = new GhRoom();
         $this->GhMedia = new GhMedia();
         $this->GhDistrict = new GhDistrict();
+        $this->GhContract = new GhContract();
+        $this->GhUser = new GhUser();
     }
 }

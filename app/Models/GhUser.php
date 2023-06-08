@@ -27,4 +27,10 @@ class GhUser extends Model
         return $this->asObject()->where($where)->first();
     }
 
+    public function getNameByAccountId($account_id){
+        return $this->getFirst([
+            'account_id' => $account_id
+        ])?->name;
+    }
+
 }
