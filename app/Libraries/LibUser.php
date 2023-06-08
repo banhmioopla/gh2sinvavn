@@ -1,22 +1,27 @@
 <?php
 namespace App\Libraries;
 
+use App\Models\GhApartment;
 use App\Models\GhContract;
-use App\Models\GhDistrict;
+use App\Models\GhCustomer;
 use App\Models\GhUser;
 
-use Firebase\JWT\Key;
-use stdClass;
 
 class LibUser
 {
     private GhUser $GhUser;
     private GhContract $GhContract;
+    private LibApartment $LibApartment;
+    private GhApartment $GhApartment;
+    private GhCustomer $GhCustomer;
 
     public function __construct()
     {
         $this->GhUser = new GhUser();
         $this->GhContract = new GhContract();
+        $this->LibApartment = new LibApartment();
+        $this->GhApartment = new GhApartment();
+        $this->GhCustomer = new GhCustomer();
 
     }
 
@@ -37,7 +42,7 @@ class LibUser
     }
 
     public function contractCountProgress($count){
-        $range_node = [5,10,20,50,80,100,200,300,400];
+        $range_node = [5,10,20,50,80,100,200,300,400,500,600];
         $progress = [];
 
         foreach ($range_node as $item){
@@ -60,4 +65,25 @@ class LibUser
 
         return implode('<i class="ti ti-arrow-narrow-right mx-2"></i>', $progress);
     }
+
+    public function renderContractTable($account_id):string{
+        $head = ['id', 'Dự Án', 'Khách Thuê', 'Ngày Hết Hạn', '★'];
+        $data = [];
+
+        foreach ($this->getContract($account_id) as $contract){
+            $apm = $this->GhApartment->getFirstById($contract->apartment_id);
+            $customer_name = $this->GhCustomer->getNameById($contract->customer_id);
+
+            $data[] = [
+                $contract->id,
+                $apm?->address_street,
+                $customer_name,
+                date('d/m/y', $contract->time_expire),
+                $contract->rate_type
+            ];
+        }
+
+        return render_table($head, $data, ['data-head-label' => 'Danh sách hợp đồng']);
+    }
+
 }

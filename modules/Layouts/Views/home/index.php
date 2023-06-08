@@ -2,6 +2,7 @@
 /**
  * @var string $dropdown_district
  * @var string $progress
+ * @var string $contract_table
  * @var int $contract_count
  */
 
@@ -24,7 +25,6 @@
     </div>
 </div>
 <div class="row justify-content-xl-center">
-
     <div class="col-xl-4">
         <div class="demo-inline-spacing mt-3">
             <div class="list-group">
@@ -83,6 +83,12 @@
                 </button>
             </div>
         </div>
+    </div>
+</div>
+<hr class="my-5">
+<div class="row justify-content-xl-center">
+    <div class="col-md-12">
+        <?= $contract_table ?>
     </div>
 </div>
 

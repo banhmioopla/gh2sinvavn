@@ -6,6 +6,7 @@ date_default_timezone_set('Asia/Ho_Chi_Minh');
 use App\Libraries\LibApartment;
 use App\Libraries\LibUser;
 use App\Models\GhApartment;
+use App\Models\GhCustomer;
 use App\Models\GhDistrict;
 use App\Models\GhMedia;
 use App\Models\GhContract;
@@ -52,6 +53,7 @@ abstract class BaseController extends Controller
     protected GhDistrict $GhDistrict;
     protected GhContract $GhContract;
     protected GhUser $GhUser;
+    protected GhCustomer $GhCustomer;
     protected LibUser $LibUser;
 
     /**
@@ -75,5 +77,6 @@ abstract class BaseController extends Controller
         $this->GhContract = new GhContract();
         $this->GhUser = new GhUser();
         $this->LibUser = new LibUser();
+        $this->GhCustomer = new GhCustomer();
     }
 }

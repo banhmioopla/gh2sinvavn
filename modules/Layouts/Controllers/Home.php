@@ -26,10 +26,12 @@ class Home extends BaseController
             $account_id = session()->get('auth_data')?->account_id;
             $contracts = $this->LibUser->getContract($account_id);
             $progress = $this->LibUser->contractCountProgress(count($contracts));
+            $contract_table = $this->LibUser->renderContractTable($account_id);
 
             return view('\Modules\Layouts\Views\home\index',[
                 'progress' => $progress,
-                'contract_count' => count($contracts)
+                'contract_count' => count($contracts),
+                'contract_table' => $contract_table,
             ]);
         }
 
