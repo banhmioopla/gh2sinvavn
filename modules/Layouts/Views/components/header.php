@@ -52,7 +52,7 @@
                        height="60"
                        width="auto" class="cursor-pointer">
                 </span>
-                        <span class="brand-text demo menu-text fw-bold"><?= APP_NAME ?></span>
+                        <span class="brand-text demo menu-text fw-bold"><?= $this->renderSection('brand_text') ?></span>
                     </a>
 
                     <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-xl-none">
@@ -77,7 +77,6 @@
                         <!--/ Style Switcher -->
 
                         <!-- User HEADER -->
-                        <?= view('\Modules\Layouts\Views\components\header-account') ?>
                     </ul>
                 </div>
             </div>

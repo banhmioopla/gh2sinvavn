@@ -17,8 +17,11 @@ class Home extends BaseController
 
     public function index()
     {
-
-        return view('\Modules\Layouts\Views\home\index',[
+        if(is_login()){
+            return view('\Modules\Layouts\Views\home\index',[
+            ]);
+        }
+        return view('\Modules\Auth\Views\login\index',[
         ]);
     }
 

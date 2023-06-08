@@ -13,3 +13,9 @@
  *
  * @see: https://codeigniter.com/user_guide/extending/common.html
  */
+
+if (! function_exists('is_login')) {
+    function is_login():string{
+        return (session()->has('is_login') && session()->get('is_login') === true);
+    }
+}
