@@ -45,15 +45,15 @@ class LibUser
                 if($item < 100){
                     $progress []= '<span class="badge badge-center rounded-pill bg-primary">'.$item.'</span>';
                 } else {
-                    $progress []= '<span><span class="badge badge-dot bg-primary me-1"></span> '.$item.'</span>';
+                    $progress []= '<span class="fw-bold"><span class="badge badge-dot bg-primary me-1"></span> '.$item.'</span>';
                 }
 
                 continue;
             }
             if($item < 100){
-                $progress[]= '<span class="badge badge-center rounded-pill bg-secondary">'.$item.'</span>';
+                $progress[]= '<span class="fw-bold"><span class="badge badge-dot bg-secondary me-1"></span> '.$item.'</span>';
             } else {
-                $progress []= '<span class="fw-bold"><span class="badge badge-dot bg-primary me-1"></span> '.$item.'</span>';
+                $progress []= '<span class="fw-bold"><span class="badge badge-dot bg-secondary me-1"></span> '.$item.'</span>';
             }
         }
 
