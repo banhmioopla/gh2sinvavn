@@ -4,6 +4,7 @@ namespace Modules\Layouts\Controllers;
 date_default_timezone_set('Asia/Ho_Chi_Minh');
 
 use App\Libraries\LibApartment;
+use App\Libraries\LibUser;
 use App\Models\GhApartment;
 use App\Models\GhDistrict;
 use App\Models\GhMedia;
@@ -51,6 +52,7 @@ abstract class BaseController extends Controller
     protected GhDistrict $GhDistrict;
     protected GhContract $GhContract;
     protected GhUser $GhUser;
+    protected LibUser $LibUser;
 
     /**
      * Be sure to declare properties for any property fetch you initialized.
@@ -72,5 +74,6 @@ abstract class BaseController extends Controller
         $this->GhDistrict = new GhDistrict();
         $this->GhContract = new GhContract();
         $this->GhUser = new GhUser();
+        $this->LibUser = new LibUser();
     }
 }
