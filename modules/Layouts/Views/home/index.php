@@ -12,10 +12,6 @@
 <?= 'Danh sách tools' ?>
 <?= $this->endSection() ?>
 
-<?= $this->section('breadcrumb_text') ?>
-<?= 'Giỏ Hàng Sinva Version 2' ?>
-<?= $this->endSection() ?>
-
 <?= $this->section('main_content') ?>
 <div class="row">
     <div class="col-xl-12 text-xl-center mb-3">
