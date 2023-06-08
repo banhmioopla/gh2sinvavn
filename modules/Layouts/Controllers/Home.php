@@ -25,7 +25,7 @@ class Home extends BaseController
         if(is_login()){
             $account_id = session()->get('auth_data')?->account_id;
             $contracts = $this->LibUser->getContract($account_id);
-            $progress = $this->LibUser->contractCountProgress(count($contracts));
+            $progress = $this->LibUser->contractCountProgress(180);
             $contract_table = $this->LibUser->renderContractTable($account_id);
 
             return view('\Modules\Layouts\Views\home\index',[

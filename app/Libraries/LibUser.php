@@ -44,7 +44,7 @@ class LibUser
         return $this->GhContract->get(['consultant_id' => $account_id, 'status <>' => 'Cancel']);
     }
 
-    public function contractCountProgress($count){
+    public function contractCountProgress($count):string{
         $range_node = [5,10,20,50,80,100,200,300,400,500,600];
         $progress = [];
 
@@ -53,20 +53,21 @@ class LibUser
                 if($item < 100){
                     $progress []= '<span class="badge badge-center rounded-pill bg-primary">'.$item.'</span>';
                 } else {
-                    $progress []= '<span class="fw-bold text-primary"><span class="badge badge-dot bg-primary me-1"></span> '.$item.'</span>';
+                    $progress []= '<span class="fw-bold text-primary align-middle h4"><span class="badge badge-dot bg-primary me-1"></span> '.$item.'</span>';
                 }
 
                 continue;
             }
+
             if($item < 100){
                 $progress[]= '<span class="fw-bold"><span class="badge badge-dot bg-secondary me-1"></span> '.$item.'</span>';
             } else {
-                $progress []= '<span class="fw-bold"><span class="badge badge-dot bg-secondary me-1"></span> '.$item.'</span>';
+                $progress []= '<span class="fw-bold align-middle h4"><span class="badge badge-dot bg-secondary me-1"></span> '.$item.'</span>';
             }
             break;
         }
 
-        return implode('<i class="ti ti-arrow-narrow-right mx-2"></i>', $progress);
+        return implode('<i class="ti ti-arrow-narrow-right mx-2"></i>', count($progress) > 4 ? array_splice($progress, -4)  : $progress);
     }
 
     public function renderContractTable($account_id):string{
