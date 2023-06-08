@@ -1,6 +1,7 @@
 <?php
 namespace App\Libraries;
 
+use App\Models\GhContract;
 use App\Models\GhDistrict;
 use App\Models\GhUser;
 
@@ -10,10 +11,12 @@ use stdClass;
 class LibUser
 {
     private GhUser $GhUser;
+    private GhContract $GhContract;
 
     public function __construct()
     {
         $this->GhUser = new GhUser();
+        $this->GhContract = new GhContract();
 
     }
 
@@ -27,5 +30,33 @@ class LibUser
         }
 
         return $user_name;
+    }
+
+    public function getContract($account_id){
+        return $this->GhContract->get(['consultant_id' => $account_id, 'status <>' => 'Cancel']);
+    }
+
+    public function contractCountProgress($count){
+        $range_node = [5,10,20,50,80,100,200,300,400];
+        $progress = [];
+
+        foreach ($range_node as $item){
+            if($count >= $item){
+                if($item < 100){
+                    $progress []= '<span class="badge badge-center rounded-pill bg-primary">'.$item.'</span>';
+                } else {
+                    $progress []= '<span><span class="badge badge-dot bg-primary me-1"></span> '.$item.'</span>';
+                }
+
+                continue;
+            }
+            if($item < 100){
+                $progress[]= '<span class="badge badge-center rounded-pill bg-secondary">'.$item.'</span>';
+            } else {
+                $progress []= '<span class="fw-bold"><span class="badge badge-dot bg-primary me-1"></span> '.$item.'</span>';
+            }
+        }
+
+        return implode('<i class="ti ti-arrow-narrow-right mx-2"></i>', $progress);
     }
 }

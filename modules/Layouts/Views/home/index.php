@@ -1,6 +1,8 @@
 <?php
 /**
  * @var string $dropdown_district
+ * @var string $progress
+ * @var int $contract_count
  */
 
 ?>
@@ -14,7 +16,15 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('main_content') ?>
+<div class="row">
+    <div class="col-xl-12 text-xl-center mb-3">
+        <div class="mb-1">Số lượng hợp đồng tích lũy <strong><?= number_format($contract_count) ?></strong></div>
+        <div><?= $progress ?></div>
+
+    </div>
+</div>
 <div class="row justify-content-xl-center">
+
     <div class="col-xl-4">
         <div class="demo-inline-spacing mt-3">
             <div class="list-group">
@@ -41,7 +51,7 @@
     <div class="col-xl-4">
         <div class="demo-inline-spacing mt-3">
             <div class="list-group">
-                <div class="list-group-item bg-secondary text-white fw-bold text-center">Tài Khoản</div>
+                <div class="list-group-item bg-secondary text-white fw-bold text-center"><?= session()->get('auth_data')?->name ?></div>
                 <div class="list-group-item d-flex justify-content-between">
                     <i class="ti ti-face-id ti-sm me-2"></i>
                     <span><?= session()->get('auth_data')?->account_id ?></span>

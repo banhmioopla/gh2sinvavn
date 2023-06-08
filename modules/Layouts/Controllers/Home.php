@@ -23,7 +23,13 @@ class Home extends BaseController
 
         $LibAuth->jwtCookieAuth();
         if(is_login()){
+            $account_id = session()->get('auth_data')?->account_id;
+
+            $progress = $this->LibUser->contractCountProgress(30);
+            $contracts = $this->LibUser->getContract($account_id);
             return view('\Modules\Layouts\Views\home\index',[
+                'progress' => $progress,
+                'contract_count' => count($contracts)
             ]);
         }
 

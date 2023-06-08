@@ -39,12 +39,12 @@
 
     <div class="col-xl">
         <label>Giá Min</label>
-        <div><input type="number" name="price_min" class="form-control"></div>
+        <div><input type="text" name="price_min" class="form-control numeral-formatting"></div>
     </div>
 
     <div class="col-xl">
         <label>Giá Max</label>
-        <div><input type="number" name="price_max" class="form-control"></div>
+        <div><input type="text" name="price_max" class="form-control numeral-formatting"></div>
     </div>
 
     <div class="col-xl">
