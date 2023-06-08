@@ -2,6 +2,7 @@
 namespace Modules\Layouts\Controllers;
 
 use App\Libraries\LibApartment;
+use App\Libraries\LibAuth;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Psr\Log\LoggerInterface;
@@ -17,10 +18,16 @@ class Home extends BaseController
 
     public function index()
     {
+
+        $LibAuth = new LibAuth();
+
+        $LibAuth->jwtCookieAuth();
         if(is_login()){
             return view('\Modules\Layouts\Views\home\index',[
             ]);
         }
+
+
         return view('\Modules\Auth\Views\login\index',[
         ]);
     }

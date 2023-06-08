@@ -53,7 +53,10 @@ class Login extends BaseController
     }
 
     public function submitLogout():ResponseInterface{
+        helper('cookie');
         session()->destroy();
+        delete_cookie('token_jwt');
+
         return $this->response->setJSON([
             'status' => true,
             'msg' => 'Đã đăng xuất'

@@ -107,6 +107,10 @@
         "src": "vendor/libs/cleavejs/cleave.js",
         "attr": null
     },
+    {
+        "src": "vendor/libs/block-ui/block-ui.js",
+        "attr": null
+    },
 
     {
         "src": "js/main.js",

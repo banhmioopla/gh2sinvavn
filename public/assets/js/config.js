@@ -111,3 +111,17 @@ if (typeof TemplateCustomizer !== 'undefined') {
     // ],
   });
 }
+
+let loader = (dom_string = 'body') => {
+  $(dom_string).block({
+    message: '<div class="spinner-border text-white" role="status"></div>',
+    timeout: 1500,
+    css: {
+      backgroundColor: 'transparent',
+      border: '0'
+    },
+    overlayCSS: {
+      opacity: 0.5
+    }
+  });
+};
