@@ -4,6 +4,7 @@ namespace App\Libraries;
 use App\Models\GhApartment;
 use App\Models\GhContract;
 use App\Models\GhCustomer;
+use App\Models\GhRoom;
 use App\Models\GhUser;
 
 
@@ -14,6 +15,7 @@ class LibUser
     private LibApartment $LibApartment;
     private GhApartment $GhApartment;
     private GhCustomer $GhCustomer;
+    private GhRoom $GhRoom;
 
     public function __construct()
     {
@@ -22,6 +24,7 @@ class LibUser
         $this->LibApartment = new LibApartment();
         $this->GhApartment = new GhApartment();
         $this->GhCustomer = new GhCustomer();
+        $this->GhRoom = new GhRoom();
 
     }
 
@@ -67,18 +70,20 @@ class LibUser
     }
 
     public function renderContractTable($account_id):string{
-        $head = ['id', 'Dự Án', 'Khách Thuê', 'Ngày Hết Hạn', '★'];
+        $head = ['id', 'Dự Án', 'Giá Thuê', 'Khách Thuê',  '<div class="text-center">Ngày Hết Hạn</div>', '★'];
         $data = [];
 
         foreach ($this->getContract($account_id) as $contract){
             $apm = $this->GhApartment->getFirstById($contract->apartment_id);
             $customer_name = $this->GhCustomer->getNameById($contract->customer_id);
+            $room = $this->GhRoom->getFirstById($contract->room_id);
 
             $data[] = [
                 $contract->id,
-                $apm?->address_street,
+                $apm?->address_street . '<small class="d-block"> mã phòng <strong>'.$room?->code.'</strong></small>',
+                number_format($contract->room_price),
                 $customer_name,
-                date('d/m/y', $contract->time_expire),
+                '<div class="text-center">'.date('d/m/y', $contract->time_expire).'</div>',
                 $contract->rate_type
             ];
         }
