@@ -74,9 +74,7 @@ class Apartment extends BaseController
             }
             $list_room = $this->GhRoom->get("active = 'YES' AND apartment_id IN (".implode(',', $apartment_ids).")", "apartment_id ASC, price DESC");
 
-        }
-
-        if(!empty($apartment_id)){
+        } else {
             $params .= " AND apartment_id = {$apartment_id}";
             $list_room = $this->GhRoom->get($params, 'price DESC');
             $address = $this->GhApartment->getFirstById($apartment_id)?->address_street;
@@ -92,17 +90,20 @@ class Apartment extends BaseController
             $card_text .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-cash"></i> HH 06 tháng</span> <strong>'  . $apm?->commission_rate_6m .   '%</strong></div>';
             $card_text .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-cash"></i> HH 12 tháng</span> <strong>'  . $apm?->commission_rate .   '%</strong></div>';
 
-            $cards .= '<div class="col-xl-3 mb-3">'. view('\Modules\Apartment\Views\apartment\card-room.php',[
-                'title' => mb_strtoupper($room->code),
-                'subtitle' => $apm?->address_street . ' , phường ' . $apm?->address_ward,
-                'card_text' => $card_text,
-                'card_links' => "",
-            ]) . '</div>';
 
             if(!in_array( $room->apartment_id, $search_apm_ids)){
+                $cards .= '<div class="col-mx-12 mt-xl-5"><h4>'.$this->LibApartment->getFullAddress($apm).'</h4></div>';
 //              $searching_title .= "<span class='badge rounded-pill bg-label-dark mx-1 my-1'>{$apm->address_street}</span>";
                 $search_apm_ids [] = $room->apartment_id;
             }
+
+
+            $cards .= '<div class="col-xl-3 mb-3">'. view('\Modules\Apartment\Views\apartment\card-room.php',[
+                'title' => mb_strtoupper($room->code),
+                'subtitle' => $this->LibApartment->getFullAddress($apm),
+                'card_text' => $card_text,
+                'card_links' => "",
+            ]) . '</div>';
         }
 
         $apartment_count = count($search_apm_ids);

@@ -16,7 +16,7 @@ class LibApartment
         return $this->GhDistrict->get($where);
     }
 
-    public function getFullAddress($apartment_object){
+    public function getFullAddress($apartment_object):string{
         if(!empty($apartment_object)){
             return mb_strtoupper($apartment_object->address_street . ', Phường '.$apartment_object->address_ward );
         }
