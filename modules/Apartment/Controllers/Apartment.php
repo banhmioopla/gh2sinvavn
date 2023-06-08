@@ -94,7 +94,7 @@ class Apartment extends BaseController
                 $card_text .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-cash"></i> HH 06 tháng</span> <strong>'  . $apm?->commission_rate_6m .   '%</strong></div>';
                 $card_text .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-cash"></i> HH 12 tháng</span> <strong>'  . $apm?->commission_rate .   '%</strong></div>';
             } else {
-                $card_text .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-calendar"></i> <span class="badge rounded-pill bg-label-success">đang thuê</span> / ngày hết hạn </span> <strong>'  . date("d/m/H",$last_contract->time_expire) .   '</strong></div>';
+                $card_text .= '<div class="d-flex justify-content-between mt-1"> <span><span class="badge rounded-pill bg-label-success">đang thuê</span> / ngày hết hạn </span> <strong>'  . date("d/m/Y",$last_contract->time_expire) .   '</strong></div>';
                 $card_text .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-user-check"></i> sale chốt</span> <strong>'  . $this->LibUser->getShortUserName($last_contract->consultant_id) .   '%</strong></div>';
             }
 
