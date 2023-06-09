@@ -4,6 +4,8 @@
  * @var string $progress
  * @var string $contract_table
  * @var int $contract_count
+ * @var int $sale_amount
+ * @var string $progress_sale
  */
 
 ?>
@@ -13,12 +15,18 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('main_content') ?>
-<div class="row">
-    <div class="col-xl-12 text-xl-center mb-3">
+<div class="row justify-content-xl-center">
+    <div class="col-xl-4 text-xl-center mb-3">
         <div class="mb-1">Số lượng hợp đồng tích lũy <strong><?= number_format($contract_count) ?></strong></div>
         <div><?= $progress ?></div>
-
     </div>
+
+
+    <div class="col-xl-4 text-xl-center mb-3">
+        <div class="mb-1">Doanh số tích lũy <strong><?= number_format($sale_amount) ?> vnđ</strong></div>
+        <div><?= $progress_sale ?></div>
+    </div>
+
 </div>
 <div class="row justify-content-xl-center">
     <div class="col-xl-4">
