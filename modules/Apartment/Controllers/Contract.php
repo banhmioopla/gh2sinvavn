@@ -1,10 +1,11 @@
 <?php
-
+namespace Modules\Apartment\Controllers;
 use CodeIgniter\HTTP\RequestInterface;
 use CodeIgniter\HTTP\ResponseInterface;
 use Modules\Layouts\Controllers\BaseController;
+use Psr\Log\LoggerInterface;
 
-class Apartment extends BaseController
+class Contract extends BaseController
 {
     public function initController(RequestInterface $request, ResponseInterface $response, LoggerInterface $logger)
     {
@@ -12,18 +13,28 @@ class Apartment extends BaseController
     }
 
     public function index(){
-        $list_contract = [];
     }
 
     public function create(){
 
+        $dropdown_apartment = $this->LibApartment->dropdownApartment();
+
+        $breadcrumb = "Nhập hợp đồng";
+        if(!session()->has('contract_new_progress')){
+            session()->set('contract_new_progress', $this->getProgressNewContract());
+        }
+
+        return view('\Modules\Apartment\Views\contract\create',[
+            'dropdown_apartment' => $dropdown_apartment,
+            'breadcrumb' => $breadcrumb,
+        ]);
     }
 
     public function submitCreate(){
 
     }
 
-    public function fetchMyContract(){
+    public function fetchMyContract():ResponseInterface{
         $account_id = session()->get('auth_data')?->account_id;
         $list_contract = $this->GhContract->get("consultant_id = {$account_id}");
 
@@ -32,6 +43,15 @@ class Apartment extends BaseController
             'contracts' => $list_contract,
             'contract_count' => count($list_contract)
         ]);
+    }
+
+    private function getProgressNewContract($current_step = null):string{
+        $arr_step = ["Chọn Dự Án", "Thông tin Deal", "Thông tin khách thuê", "Chờ Ký", "Đã Ký"];
+
+
+        foreach ($arr_step as $step) {
+
+        }
     }
 
 

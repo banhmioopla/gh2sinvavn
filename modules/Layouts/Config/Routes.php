@@ -6,4 +6,5 @@ use Config\Services;
 
 $routes->group('', ['namespace' => 'Modules\Layouts\Controllers'], static function ($routes) {
     $routes->get('home', 'Home::index');
+    $routes->get('load/form-add-new-contract', 'LoadUi::formAddNewContract');
 });

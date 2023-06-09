@@ -71,6 +71,15 @@ class LibUser
         return $total;
     }
 
+    public function getTotalSaleByContract($contract){
+        $rate_type = (1- $contract->rate_type);
+        if($contract?->in_array == 1){
+            $rate_type = $contract->rate_type;
+        }
+
+        return $rate_type * $contract->room_price * $contract->commission_rate/100;
+    }
+
     public function contractCountProgress($amount):string{
         $range_node = [5,10,20,50,80,100,200,300,400,500];
         $progress = [];
@@ -144,7 +153,10 @@ class LibUser
                 $contract->id,
                  '<span class="badge bg-primary">'.$room?->code.'</span>'
                 . ('<small class="d-block my-1">Dự án <strong>'.$this->LibApartment->getFullAddress($apm).'</strong></small>')
-                . (count($user_supports) ? '<small class="d-block"> Hỗ trợ: <strong>'.implode(" , ", $user_supports) .'</strong></small>' : '') ,
+                . ('<small class="me-2">HHKG <strong>'.$contract->commission_rate.'%</strong></small>')
+                . ('<small class="me-2">Giá thuê <strong>'.number_format($contract->room_price).'</strong></small>')
+                . (count($user_supports) ? '<small class="me-2"> Hỗ trợ: <strong>'.implode(" , ", $user_supports) .'</strong></small>' : ''),
+
 
                 number_format($contract->room_price),
 
@@ -156,5 +168,7 @@ class LibUser
 
         return render_table($head, $data, ['data-head-label' => 'Danh sách hợp đồng']);
     }
+
+
 
 }

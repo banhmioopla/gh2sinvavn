@@ -41,8 +41,9 @@
                     <i class="ti ti-download ti-sm me-2"></i>
                     Tải ảnh phòng
                 </a>
-                <a href="" class="list-group-item list-group-item-action">
-                    <i class="ti ti-loader ti-sm me-2 ti-spin"></i> <del>Nhập hợp đồng</del>
+                <a href="<?= base_url('/apm/contract/new') ?>" class="list-group-item list-group-item-action">
+                    <i class="ti ti-file-plus ti-sm me-2"></i>
+                    Nhập hợp đồng
                 </a>
                 <a href="" class="list-group-item list-group-item-action">
                     <i class="ti ti-loader ti-sm me-2 ti-spin"></i>
@@ -97,5 +98,6 @@
 </div>
 
 
+<?= load_single_js('apartment/contract.js') ?>
 <?= load_single_js('auth/login.js') ?>
 <?= $this->endSection() ?>
