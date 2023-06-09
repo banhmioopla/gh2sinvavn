@@ -60,7 +60,12 @@ class LibUser
         $list = $this->getContract($account_id);
         $total = 0;
         foreach ($list as $item){
-            $total += $item->rate_type * $item->room_price * $item->commission_rate/100;
+            $rate_type = (1- $item->rate_type);
+            if($item->consultant_id === $account_id){
+                $rate_type = $item->rate_type;
+            }
+
+            $total += $rate_type * $item->room_price * $item->commission_rate/100;
         }
 
         return $total;
@@ -93,7 +98,7 @@ class LibUser
     }
 
     public function contractSaleProgress($amount):string{
-        $range_node = [5,10,20,50,80,100,200,300,400,500];
+        $range_node = [5,10,20,50,80,100,200,300,400,500,800,1000];
         $progress = [];
 
         foreach ($range_node as $item){
