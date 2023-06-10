@@ -30,14 +30,14 @@
 <?= $this->endSection() ?>
 
 <?= $this->section('main_content') ?>
-<div class="row justify-content-center my-3">
+<div class="row justify-content-center my-5">
     <div class="col-xl-8 text-center ">
-        <div id="contract-new-progress"><?= session()->get('contract_new_progress') ?? '<span class="alert alert-danger d-flex align-items-center"><span class="alert-icon text-danger me-2"><i class="ti ti-ban ti-xs"></i></span> Something wrong !!!!</span>' ?></div>
+        <div id="contract-new-progress" class="row justify-content-center"><?= session()->get('contract_new_progress') ?? '<span class="alert alert-danger d-flex align-items-center"><span class="alert-icon text-danger me-2"><i class="ti ti-ban ti-xs"></i></span> Something wrong !!!!</span>' ?></div>
     </div>
 </div>
 
 <div class="row justify-content-center">
-
+    <h4 class="col-xl-12 text-center">Chọn dự án</h4>
     <div class="col-xl-4">
         <label>Chọn Dự Án</label>
         <?= $dropdown_apartment ?>

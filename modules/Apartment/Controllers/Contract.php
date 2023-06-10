@@ -20,6 +20,8 @@ class Contract extends BaseController
         $dropdown_apartment = $this->LibApartment->dropdownApartment();
 
         $breadcrumb = "Nhập hợp đồng";
+        session()->remove('contract_new_progress');
+
         if(!session()->has('contract_new_progress')){
             session()->set('contract_new_progress', $this->getProgressNewContract());
         }
@@ -46,12 +48,32 @@ class Contract extends BaseController
     }
 
     private function getProgressNewContract($current_step = null):string{
-        $arr_step = ["Chọn Dự Án", "Thông tin Deal", "Thông tin khách thuê", "Chờ Ký", "Đã Ký"];
+        $arr_step = [
+            ["title" => "Chọn Dự Án", "icon" => "ti ti-building-skyscraper ti-sm"],
+            ["title" => "Thông tin Deal", "icon" => "ti ti-receipt-2 ti-sm"],
+            ["title" => "Thông tin khách thuê", "icon" => "ti ti-id ti-sm"],
+            ["title" => "Chờ Ký", "icon" => "ti ti-calendar-event ti-sm"],
+            ["title" => "Đã Ký", "icon" => "ti ti-circle-check ti-sm"],
+        ];
 
 
-        foreach ($arr_step as $step) {
+        foreach ($arr_step as $index => $step) {
+            if($current_step === $step){
+                $arr_step[$index] = '<span class="col-2 contract-progress-item" data-key="'.$step["title"].'">
+                                        <span class="badge badge-center rounded-pill p-2 bg-label-success mx-2"><i class="'.$step["icon"].'"></i></span>
+                                        <small class="d-block">'.$step["title"].'</small>
+                                    </span>';
+                continue;
+            }
+
+            $arr_step[$index] = '<span class="col-2">
+                                    <span class="badge badge-center rounded-pill p-2 bg-label-secondary mx-2"><i class="'.$step["icon"].'"></i></span>
+                                    <small class="d-block">'.$step["title"].'</small>
+                                </span>';
 
         }
+
+        return implode('', $arr_step);
     }
 
 
