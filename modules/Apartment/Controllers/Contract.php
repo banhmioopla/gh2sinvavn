@@ -17,7 +17,34 @@ class Contract extends BaseController
 
     public function create(){
 
-        $dropdown_apartment = $this->LibApartment->dropdownApartment();
+        $list_dropdown = [0 => "Chọn Quận"];
+        $auth_account = session()->get('auth_data')?->account_id;
+        foreach ($this->LibApartment->getDistrict("code IN (1,4,7,8,10,'binhthanh','govap','binhchanh', 'nhabe')") as $d) {
+            $list_apm = $this->GhApartment->get([
+                'active' => 'YES',
+                'district_code' => $d->code
+            ]);
+
+            foreach ($list_apm as $apm){
+                $list_dropdown[$apm->id] = $this->LibApartment->getFullAddress($apm);
+            }
+        }
+        $dropdown_apartment = form_dropdown('dropdown-apartment' , $list_dropdown, "", [
+            'class' => 'form-control select2',
+            'id' => 'dropdown-apartment'
+        ]);
+
+        $list_dropdown = [0 => "Chọn Sale Hỗ Trợ"];
+        foreach ($this->GhUser->get(['active' => 'YES', 'account_id <>' => $auth_account]) as $user){
+            $list_dropdown [$user->account_id] = mb_strtoupper($user->name);
+        }
+
+        $dropdown_support_ids = form_dropdown('dropdown-support-ids' , $list_dropdown, "", [
+            'class' => 'form-control select2',
+            'id' => 'dropdown-support-ids',
+            'multiple' => true,
+        ]);
+
 
         $breadcrumb = "Nhập hợp đồng";
         session()->remove('contract_new_progress');
@@ -28,6 +55,7 @@ class Contract extends BaseController
 
         return view('\Modules\Apartment\Views\contract\create',[
             'dropdown_apartment' => $dropdown_apartment,
+            'dropdown_support_ids' => $dropdown_support_ids,
             'breadcrumb' => $breadcrumb,
         ]);
     }

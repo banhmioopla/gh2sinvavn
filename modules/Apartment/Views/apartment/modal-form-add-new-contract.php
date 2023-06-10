@@ -1,9 +1,4 @@
-<?php
 
-$LibApartment = new \App\Libraries\LibApartment();
-$dropdown_apartment = $LibApartment->dropdownApartment();
-
-?>
 
 <div
     class="modal-onboarding modal fade animate__animated h-100"
@@ -39,7 +34,6 @@ $dropdown_apartment = $LibApartment->dropdownApartment();
                                     <div class="col-sm-6">
                                         <div class="mb-3">
                                             <label for="nameEx" class="form-label">Dự án</label>
-                                            <?= $dropdown_apartment ?>
                                         </div>
                                     </div>
                                     <div class="col-sm-6">

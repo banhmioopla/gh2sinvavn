@@ -3,6 +3,7 @@
  * @var string $dropdown_apartment
  * @var string $breadcrumb
  * @var string $contract_new_progress
+ * @var string $dropdown_support_ids
  */
 
 ?>
@@ -42,7 +43,7 @@
     </div>
     <div class="col-xl-4">
         <label>Chọn Mã Phòng</label>
-        <div id="picking-room" class="text-danger"> <span class="alert alert-warning d-flex align-items-center"><span class="alert-icon text-warning me-2"><i class="ti ti-ban ti-xs"></i></span> Chọn dự án đi bạn !!!!</span></div>
+        <div id="pick-room" class="text-danger"> <span class="alert alert-warning d-flex align-items-center"><span class="alert-icon text-warning me-2"><i class="ti ti-ban ti-xs"></i></span> Chọn dự án đi bạn !!!!</span></div>
     </div>
 </div>
 
@@ -51,17 +52,21 @@
 
     <div class="col-xl-7 mb-3">
         <label class="form-label" for="consultant_id">Sale Chốt</label>
-        <input type="text" class="form-control" id="consultant_id">
+        <input type="text" class="form-control" value="<?= session()->get('auth_data')->name ?>" readonly id="consultant_id">
     </div>
 
     <div class="col-xl-1 mb-3">
-        <label for="rate_type" class="form-label text-center d-block">★</label>
-        <input type="text" class="form-control" id="rate_type">
+        <label for="rate_type" class="form-label text-center d-block">Số ★</label>
+        <select name="rate_type" id="rate_type" class="form-control">
+            <option class="text-center" value="1">1</option>
+            <option class="text-center" value="0.7">0.7</option>
+            <option class="text-center" value="0.7">0.6</option>
+        </select>
     </div>
 
     <div class="col-xl-8 mb-3">
-        <label class="form-label" for="support_ids">Sale Hỗ Trợ</label>
-        <input type="text" class="form-control" id="support_ids">
+        <label class="form-label" for="dropdown-support-ids">Sale Hỗ Trợ</label>
+        <?= $dropdown_support_ids ?>
     </div>
 
     <div class="col-xl-8 mb-3">
@@ -85,13 +90,15 @@
 
     <div class="col-xl-8">
         <div class="row">
-            <div class="col-xl-6 mb-3">
-                <label class="form-label" for="time_start">Ngày bắt đầu</label>
-                <input type="text" class="form-control app-custom-date-picker" id="time_start">
+            <div class="col-xl-6  mb-3">
+                <div class="form-group">
+                    <label class="form-label" for="time_start">Ngày bắt đầu</label>
+                    <input type="text" class="form-control app-custom-date-picker" id="time_start">
+                </div>
             </div>
-            <div class="col-xl-6 mb-3">
+            <div class="col-xl-6  mb-3">
                 <label class="form-label" for="time_end">Ngày kết thúc</label>
-                <input type="text" class="form-control app-custom-date-picker" id="time_end">
+                <input type="text" class="form-control" id="time_end">
             </div>
         </div>
     </div>
@@ -137,23 +144,30 @@
     </div>
 
     <div class="col-xl-8 mb-3">
-        <label class="form-label" for="customer_birthdate">Ngày Sinh</label>
-        <input type="text" class="form-control app-custom-date-picker" id="customer_birthdate">
+        <div class="row">
+            <div class="col-xl-6">
+                <label class="form-label" for="customer_birthdate">Ngày Sinh</label>
+                <input type="text" class="form-control app-custom-date-picker" id="customer_birthdate">
+            </div>
+            <div class="col-xl-6">
+                <label class="form-label" for="customer_email">Email</label>
+                <input type="text" class="form-control" id="customer_email">
+            </div>
+        </div>
     </div>
 
     <div class="col-xl-8 mb-3">
-        <label class="form-label" for="customer_email">Email</label>
-        <input type="text" class="form-control" id="customer_email">
-    </div>
+        <div class="row">
+            <div class="col-xl-6">
+                <label class="form-label" for="ID_card">Chứng minh thư, căn cước công dân</label>
+                <input type="text" class="form-control" id="ID_card">
+            </div>
 
-    <div class="col-xl-8 mb-3">
-        <label class="form-label" for="ID_card">Chứng minh thư, căn cước công dân</label>
-        <input type="text" class="form-control" id="ID_card">
-    </div>
-
-    <div class="col-xl-8 mb-3">
-        <label class="form-label" for="address_street">Địa chỉ</label>
-        <input type="text" class="form-control" id="address_street">
+            <div class="col-xl-6">
+                <label class="form-label" for="address_street">Địa chỉ</label>
+                <input type="text" class="form-control" id="address_street">
+            </div>
+        </div>
     </div>
 
 </div>

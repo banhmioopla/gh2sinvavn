@@ -38,39 +38,4 @@ class LibApartment
             'time_expire > ' => time()
         ]);
     }
-
-    public function dropdownApartment():string{
-        $list_dropdown = [];
-        foreach ($this->getDistrict("code IN (1,4,7,8,10,'binhthanh','govap','binhchanh', 'nhabe')") as $d) {
-            $districts[$d->code] =  $d->name;
-            $list_apm = $this->GhApartment->get([
-                'active' => 'YES',
-                'district_code' => $d->code
-            ]);
-
-            foreach ($list_apm as $apm){
-                $list_dropdown[$apm->id] = $this->getFullAddress($apm);
-            }
-        }
-
-        return form_dropdown('dropdown_apartment_id' , $list_dropdown, "", ['class' => 'form-control select2']);
-    }
-
-    public function dropdownRoom($apm_id):string{
-        $list_dropdown = [];
-        $list_room = $this->GhRoom->get([
-            'active' => 'YES',
-            'apartment_id' => $apm_id
-        ]);
-
-        foreach ($list_room as $room){
-            $list_dropdown[$room->id] = $room->code . ' - ' . number_format($room->price);
-        }
-
-        return form_dropdown('dropdown_room_id' , $list_dropdown, "", ['class' => 'form-control']);
-    }
-
-
-
-
 }
