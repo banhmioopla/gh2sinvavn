@@ -48,7 +48,6 @@ class LibApartment
                 'items' => ['id' => 0, 'text' => "Dự Án Không Có Phòng"]
             ];
         }
-
         $items = [];
 
         foreach ($apartments as $apm){
@@ -59,7 +58,7 @@ class LibApartment
             ];
         }
 
-        return ['items' => $items];
+        return ['items' => [['id' => '0', 'text' => "chọn dự án"],...$items]];
     }
 
     public function dropdownRoomSelect2($apartment_id):array{

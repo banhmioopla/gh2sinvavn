@@ -72,7 +72,6 @@ class Apartment extends BaseController
                 $apartment_ids[] = $item->id;
             }
             $list_room = $this->GhRoom->get("active = 'YES' AND apartment_id IN (".implode(',', $apartment_ids).")", "apartment_id ASC, price DESC");
-
         } else {
             $params .= " AND apartment_id = {$apartment_id}";
             $list_room = $this->GhRoom->get($params, 'price DESC');
@@ -84,6 +83,9 @@ class Apartment extends BaseController
         $search_apm_ids = [];
         foreach ($list_room as $room) {
             $apm = $this->GhApartment->getFirstById($room->apartment_id);
+            if(empty($apm)) {
+                continue;
+            }
 
             $card_text = "<div class='fw-bold d-flex justify-content-between'>". ($room->price ? "<i class='ti ti-tag'></i>" . number_format($room->price) : "chưa cập nhật") . "</div>";
 
@@ -99,6 +101,23 @@ class Apartment extends BaseController
 
             if(!in_array( $room->apartment_id, $search_apm_ids)){
                 $cards .= '<div class="col-mx-12 mt-xl-5"><h4>'.$this->LibApartment->getFullAddress($apm).'</h4></div>';
+
+                $card_text_service = '<p>'.$apm->description.'</p>';
+                $card_text_service .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-cash"></i> Ký dài hạn</span> <strong>'  . $apm?->contract_long_term .   '%</strong></div>';
+                $card_text_service .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-cash"></i> Ký ngắn hạn</span> <strong>'  . $apm?->contract_short_term .   '%</strong></div>';
+                if($apm->time_insert > 0){
+                    $card_text_service .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-calendar"></i> Ngày tạo</span> <strong>'  . date("d/m/y",$apm->time_insert) .   '</strong></div>';
+                }
+                if($apm->time_update > 0){
+                    $card_text_service .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-calendar"></i> Ngày tạo</span> <strong>'  . date("d/m/y",$apm->time_update) .   '</strong></div>';
+                }
+
+                $cards .= '<div class="col-xl-6 mb-xl-3 mb-2">'. view('\Modules\Apartment\Views\apartment\card-room.php',[
+                        'title' => "Mô tả",
+                        'subtitle' => "",
+                        'card_text' => $card_text_service,
+                        'card_links' => "",
+                    ]) . '</div>';
 //              $searching_title .= "<span class='badge rounded-pill bg-label-dark mx-1 my-1'>{$apm->address_street}</span>";
                 $search_apm_ids [] = $room->apartment_id;
             }
