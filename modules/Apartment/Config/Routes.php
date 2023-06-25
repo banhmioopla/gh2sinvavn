@@ -1,8 +1,9 @@
 <?php
+use App\Libraries\LibApartment;
+use App\Models\GhRoom;
 
-use Config\Services;
 
-/** @var Services $routes */
+/** @var \CodeIgniter\Router\RouteCollection $routes */
 
 $routes->group('apm', ['namespace' => 'Modules\Apartment\Controllers'], static function ($routes) {
     $routes->get('downloader/preview', 'Downloader::preview');
@@ -13,4 +14,21 @@ $routes->group('apm', ['namespace' => 'Modules\Apartment\Controllers'], static f
     $routes->get('downloader/dropdown-apartment', 'Downloader::dropdownApartment');
     $routes->get('downloader/dropdown-room', 'Downloader::dropdownRoom');
     $routes->post('downloader/submit-download', 'Downloader::submitDownload');
+
+    $routes->get('dropdown-room', static function(){
+        $apartment_id = request()->getGet('apartment_id');
+        return response()->setJSON(
+            (new LibApartment())->dropdownRoomSelect2($apartment_id)
+        );
+    });
+
+    $routes->get('room-info', static function(){
+        $room_id = request()->getGet('room_id');
+
+        return response()->setJSON([
+            'status' => true,
+            'room_info' => (new GhRoom())->getFirstById($room_id)
+        ]);
+    });
+
 });

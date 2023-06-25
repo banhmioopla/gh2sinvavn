@@ -5,6 +5,7 @@ use App\Models\GhApartment;
 use App\Models\GhContract;
 use App\Models\GhDistrict;
 use App\Models\GhRoom;
+use CodeIgniter\HTTP\ResponseInterface;
 
 class LibApartment
 {
@@ -37,5 +38,26 @@ class LibApartment
             'room_id' => $room_id,
             'time_expire > ' => time()
         ]);
+    }
+
+    public function dropdownRoomSelect2($apartment_id):array{
+        $rooms = (new GhRoom())->get(['apartment_id' => $apartment_id, 'active' => 'YES']);
+
+        if(empty($rooms)){
+            return [
+                'items' => ['id' => 0, 'text' => "Dự Án Không Có Phòng"]
+            ];
+        }
+
+        $items = [];
+
+        foreach ($rooms as $item){
+            $items[] = [
+                'id' => $item->id,
+                'text' => empty($item->code) ? ".. không có mã phòng .." : mb_strtoupper($item->code)
+            ];
+        }
+
+        return ['items' => $items];
     }
 }

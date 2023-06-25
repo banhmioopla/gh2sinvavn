@@ -41,7 +41,6 @@ class Apartment extends BaseController
         $apartment_id = $this->request->getGet('apartment_id');
 
         $params = "active = 'YES'";
-        $list_room = [];
         $searching_title = ''; $cards = '';
 
         if(!empty($this->request->getGet('price_min'))){

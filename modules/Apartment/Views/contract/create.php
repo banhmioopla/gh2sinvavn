@@ -37,13 +37,13 @@
 
 <div class="row mb-3 justify-content-center" id="section-pick-apartment">
     <h4 class="col-xl-12 text-center">Chọn dự án</h4>
-    <div class="col-xl-4">
+    <div class="col-xl-6">
         <label>Chọn Dự Án</label>
         <?= $dropdown_apartment ?>
     </div>
-    <div class="col-xl-4">
-        <label>Chọn Mã Phòng</label>
-        <div id="pick-room" class="text-danger"> <span class="alert alert-warning d-flex align-items-center"><span class="alert-icon text-warning me-2"><i class="ti ti-ban ti-xs"></i></span> Chọn dự án đi bạn !!!!</span></div>
+    <div class="col-xl-2">
+        <label for="pick-room">Chọn Mã Phòng</label>
+        <select id="pick-room" class="form-control"></select>
     </div>
 </div>
 
@@ -106,7 +106,7 @@
     <div class="col-xl-8">
         <div class="row">
             <div class="col-xl-6 mb-3">
-                <label class="form-label" for="deposit">Tiền đặt cọc</label>
+                <label class="form-label" for="deposit">Tiền Đặt Cọc</label>
                 <input type="text" class="form-control numeral-formatting" id="deposit">
             </div>
             <div class="col-xl-6 mb-3">
