@@ -103,8 +103,8 @@ class Apartment extends BaseController
                 $cards .= '<div class="col-mx-12 mt-xl-5"><h4>'.$this->LibApartment->getFullAddress($apm).'</h4></div>';
 
                 $card_text_service = '<p>'.$apm->description.'</p>';
-                $card_text_service .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-cash"></i> Ký dài hạn</span> <strong>'  . $apm?->contract_long_term .   '%</strong></div>';
-                $card_text_service .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-cash"></i> Ký ngắn hạn</span> <strong>'  . $apm?->contract_short_term .   '%</strong></div>';
+                $card_text_service .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-caret-right"></i> Ký dài hạn</span> <strong>'  . $apm?->contract_long_term .   '</strong></div>';
+                $card_text_service .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-caret-right"></i> Ký ngắn hạn</span> <strong>'  . $apm?->contract_short_term .   '</strong></div>';
                 if($apm->time_insert > 0){
                     $card_text_service .= '<div class="d-flex justify-content-between mt-1"><span> <i class="ti ti-calendar"></i> Ngày tạo</span> <strong>'  . date("d/m/y",$apm->time_insert) .   '</strong></div>';
                 }
