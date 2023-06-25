@@ -40,6 +40,28 @@ class LibApartment
         ]);
     }
 
+    public function dropdownApartmentSelect2($district_code):array{
+
+        $apartments = (new GhApartment())->get(['active' => 'YES', 'district_code' => $district_code]);
+        if(empty($apartments)){
+            return [
+                'items' => ['id' => 0, 'text' => "Dự Án Không Có Phòng"]
+            ];
+        }
+
+        $items = [];
+
+        foreach ($apartments as $apm){
+            if(!in_array($apm->district_code, [4,7,8,'nhabe','binhchanh'])) continue;
+            $items[] = [
+                'id' => $apm->id,
+                'text' => $this->getFullAddress($apm)
+            ];
+        }
+
+        return ['items' => $items];
+    }
+
     public function dropdownRoomSelect2($apartment_id):array{
         $rooms = (new GhRoom())->get(['apartment_id' => $apartment_id, 'active' => 'YES']);
 

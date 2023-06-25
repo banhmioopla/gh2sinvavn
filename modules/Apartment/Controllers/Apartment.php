@@ -21,7 +21,7 @@ class Apartment extends BaseController
 
         $districts = [0 => 'Chọn quận'];
 
-        foreach ($this->LibApartment->getDistrict("code IN (1,4,7,8,10,'binhthanh','govap','binhchanh', 'nhabe')") as $d) {
+        foreach ($this->LibApartment->getDistrict("code IN (1,4,7,8,'binhchanh', 'nhabe')") as $d) {
             $districts[$d->code] =  $d->name;
         }
 

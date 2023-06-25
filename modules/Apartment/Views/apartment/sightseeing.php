@@ -48,8 +48,8 @@
     </div>
 
     <div class="col-xl">
-        <label>Chọn Dự Án</label>
-        <div id="pick-apartment">loading dự án...</div>
+        <label for="dropdown-apartment">Chọn Dự Án</label>
+        <select id="dropdown-apartment" class="form-control"></select>
     </div>
 
     <div class="col-xl-12 mt-2 text-center">

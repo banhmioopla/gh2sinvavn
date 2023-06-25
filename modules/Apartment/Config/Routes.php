@@ -22,6 +22,13 @@ $routes->group('apm', ['namespace' => 'Modules\Apartment\Controllers'], static f
         );
     });
 
+    $routes->get('dropdown-apartment', static function(){
+        $district_code = request()->getGet('district_code');
+        return response()->setJSON(
+            (new LibApartment())->dropdownApartmentSelect2($district_code)
+        );
+    });
+
     $routes->get('room-info', static function(){
         $room_id = request()->getGet('room_id');
 
