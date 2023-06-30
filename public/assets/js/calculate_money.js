@@ -24,8 +24,6 @@ $(document).ready(function(){
         $('.money-counter').each(function() {
 
             let count = $(this).val().length ? $(this).val() : 0;
-            console.log('-- count', count);
-            console.log('-- numHasValue', numHasValue(count));
             if( $(this).val().length && !numHasValue(count)){
                 valid = false;
                 return false;
@@ -39,5 +37,30 @@ $(document).ready(function(){
         }
 
         result.text(addCommas(sum));
-    })
+    });
+
+    let bmi_cal = (h, w) => {
+        let rate = (w*10000/(h*h)).toFixed(2);
+
+        let status = "<h2 class='text-danger fw-bold'>"+rate+" Thừa Cân</h2>";
+
+        if(rate < 25) {
+            status = "<h2 class='text-success fw-bold'>"+rate+" Khỏe mạnh</h2>";
+        }
+
+        if(rate < 18.5) {
+            status = "<h2 class='text-danger fw-bold'>"+rate+" Thiếu Cân</h2>";
+        }
+
+        return {
+            rate: rate,
+            status:status
+        };
+    }
+
+    $('#bmi-height, #bmi-weight').keyup(function(){
+
+        $('#result-bmi').html(bmi_cal($('#bmi-height').val(), $('#bmi-weight').val()).status)
+    });
+
 })
