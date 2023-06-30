@@ -20,7 +20,6 @@ if (! function_exists('is_login')) {
     }
 }
 
-
 if (! function_exists('render_table')) {
     function render_table($heading = [], $data = [], $extra = []):string{
         $table = new \CodeIgniter\View\Table();
@@ -50,3 +49,58 @@ if (! function_exists('render_table')) {
         return $table->generate();
     }
 }
+
+
+if (! function_exists('get_cash_time_from')) {
+    function get_default_time_range():object{
+        $time_from = date("06-m-Y");
+        $time_to = date("05-m-Y",strtotime($time_from.' +1 month'));
+
+        if(strtotime(date("d-m-Y")) < strtotime(date("5-m-Y"))+86399){
+            $time_from = date("06-m-Y", strtotime("-1 month"));
+            $time_to = date("05-m-Y");
+        }
+
+        return (object) [
+            'time_from' => $time_from,
+            'time_to'   => $time_to
+        ];
+    }
+}
+
+
+if (! function_exists('is_admin')) {
+    function is_admin($account_id):bool{
+        $config = get_config('list_admin_account_id');
+
+        return in_array($account_id, json_decode($config));
+    }
+}
+
+if (! function_exists('get_admin_pin_code')) {
+    function get_admin_pin_code():string{
+        return get_config('admin_pin_code');
+    }
+}
+
+if (! function_exists('get_list_district_open')) {
+    function get_list_district_open():array|null{
+        $config = get_config('list_district_open');
+
+        return json_decode($config);
+    }
+}
+
+if (! function_exists('get_config')) {
+    function get_config($code):string{
+        $config = (new \App\Models\GhConfig())->getFirst(['code' => $code]);
+        return empty($config) ? "" : $config->value;
+    }
+}
+
+if (! function_exists('get_logo_path')) {
+    function get_logo_path():string{
+        return base_url('public/assets/img/branding/GIOHANG.png');
+    }
+}
+

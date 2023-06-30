@@ -27,10 +27,11 @@ class LibApartment
     }
 
     public function getFullAddress($apartment_object):string{
-        if(!empty($apartment_object)){
-            return mb_strtoupper($apartment_object->address_street . ', Phường '.$apartment_object->address_ward );
+        if(empty($apartment_object)){
+            return "";
         }
-        return "";
+
+        return mb_strtoupper($apartment_object->address_street . ', Phường '.$apartment_object->address_ward);
     }
 
     public function getLastContractInLeaseTerm($room_id){

@@ -40,16 +40,29 @@ class LibUser
         return $user_name;
     }
 
-    public function getContract($account_id):array{
+    public function getContract($account_id, $where = ""):array{
         helper('array');
+
+
+        $where_query =  "ORD(arr_supporter_id) > 0";
+        if(!empty($where)){
+            $where_query .= " AND {$where}";
+        }
+
         $query = /** @lang */ <<<SQL
         SELECT gh_contract.*,  JSON_CONTAINS(JSON_EXTRACT(arr_supporter_id, "$[*]"), '"{$account_id}"') AS in_array 
-        FROM gh_contract WHERE ORD(arr_supporter_id) > 0 
+        FROM gh_contract WHERE $where_query
         SQL;
 
         $list_filter_support = $this->GhContract->db->query($query)->getResult();
 
-        $list_filter_consultant = $this->GhContract->get(['consultant_id' => $account_id, 'status <>' => 'Cancel']);
+
+        $where_query = "consultant_id = {$account_id} AND status <> 'Cancel' ";
+        if(!empty($where)){
+            $where_query .= " AND {$where}";
+        }
+
+        $list_filter_consultant = $this->GhContract->get($where_query);
 
         $contracts = [...$list_filter_support, ...$list_filter_consultant];
         array_sort_by_multiple_keys($contracts, ['id' => SORT_DESC]);
@@ -133,11 +146,11 @@ class LibUser
     }
 
 
-    public function renderContractTable($account_id):string{
-        $head = ['id', 'Dự Án', 'Giá Thuê', 'Khách Thuê',  '<div class="text-center">Ngày Hết Hạn</div>', '★'];
+    public function renderContractTable($account_id, $where = []):string{
+        $head = ['id', 'Dự Án', 'Doanh Số', 'Khách Thuê',  '<div class="text-center">Ngày Hết Hạn</div>', '★'];
         $data = [];
 
-        foreach ($this->getContract($account_id) as $contract){
+        foreach ($this->getContract($account_id, $where) as $contract){
             $apm = $this->GhApartment->getFirstById($contract->apartment_id);
             $customer_name = $this->GhCustomer->getNameById($contract->customer_id);
             $room = $this->GhRoom->getFirstById($contract->room_id);
@@ -146,7 +159,9 @@ class LibUser
 
             // map user.account_id => user.name
             if(is_array(json_decode($contract?->arr_supporter_id)) && count(json_decode($contract?->arr_supporter_id))){
-                $user_supports = array_map(fn($element) => $this->getShortUserName($element), json_decode($contract?->arr_supporter_id));
+                $user_supports = array_map(fn($element) =>
+                    $this->getShortUserName($element), json_decode($contract?->arr_supporter_id)
+                );
             }
 
             $data[] = [
@@ -156,11 +171,8 @@ class LibUser
                 . ('<small class="me-2">HHKG <strong>'.$contract->commission_rate.'%</strong></small>')
                 . ('<small class="me-2">Giá thuê <strong>'.number_format($contract->room_price).'</strong></small>')
                 . (count($user_supports) ? '<small class="me-2"> Hỗ trợ: <strong>'.implode(" , ", $user_supports) .'</strong></small>' : ''),
-
-
-                number_format($contract->room_price),
-
-                $customer_name,
+                number_format((new LibContract())->getSaleAmount($contract->id)),
+                '<small class="fw-bolder">'.mb_strtoupper($customer_name).'</small>',
                 '<div class="text-center">'.date('d/m/y', $contract->time_expire).'</div>',
                 $contract->rate_type
             ];
@@ -169,6 +181,40 @@ class LibUser
         return render_table($head, $data, ['data-head-label' => 'Danh sách hợp đồng']);
     }
 
+
+    public function incomePreview($account_id):object{
+
+        $income_data = [];
+        $default_time = get_default_time_range();
+
+        $time_from = strtotime($default_time->time_from);
+        $time_to = strtotime($default_time->time_to) + 86399;
+
+        $where = "{$time_from} <= gh_contract.time_check_in AND gh_contract.time_check_in <= {$time_to}";
+        $list_contract = $this->getContract($account_id, $where);
+        $contract_count = count($list_contract);
+
+
+
+        foreach ($list_contract as $contract){
+            $total_sale = (new LibContract())->getSaleAmount($contract->id);
+            $total_sale_after_cost = $total_sale - $contract->contract_cost;
+
+            $income_data []= (object)[
+                'contract_id' => $contract->id,
+                'total_sale' => $total_sale,
+                'total_sale_after_cost' => $total_sale_after_cost,
+                'income_amount_preview' => 0,
+                'income_amount' => 0,
+                'address_info' => (new LibContract())->getAddressInfo($contract->id),
+            ];
+        }
+
+        return (object)[
+            'income_data' => $income_data,
+            'contract_count' => $contract_count
+        ];
+    }
 
 
 }

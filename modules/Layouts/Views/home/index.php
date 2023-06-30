@@ -16,20 +16,22 @@
 
 <?= $this->section('main_content') ?>
 <div class="row justify-content-xl-center">
-    <div class="col-xl-4 text-xl-center mb-3">
+    <div class="col-xl-4 text-center mb-3">
         <div class="mb-1">Số lượng hợp đồng tích lũy <strong><?= number_format($contract_count) ?></strong></div>
         <div><?= $progress ?></div>
+        <hr class="d-block d-xl-none">
     </div>
 
 
-    <div class="col-xl-4 text-xl-center mb-3">
+    <div class="col-xl-4 text-center mb-3">
         <div class="mb-1">Doanh số tích lũy <strong><?= number_format($sale_amount) ?> vnđ</strong></div>
         <div><?= $progress_sale ?></div>
+        <hr class="d-block d-xl-none">
     </div>
 
 </div>
 <div class="row justify-content-xl-center">
-    <div class="col-xl-4">
+    <div class="col-xl-4 col-6">
         <div class="demo-inline-spacing mt-3">
             <div class="list-group">
                 <div class="list-group-item bg-secondary text-white fw-bold text-center">Dự Án</div>
@@ -45,6 +47,10 @@
                     <i class="ti ti-file-plus ti-sm me-2"></i>
                     Nhập hợp đồng
                 </a>
+                <a href="<?= base_url('/cf/utilities/calculate-money') ?>" class="list-group-item list-group-item-action">
+                    <i class="ti ti-calculator ti-sm me-2"></i>
+                    Máy tính tiền
+                </a>
                 <a href="" class="list-group-item list-group-item-action">
                     <i class="ti ti-loader ti-sm me-2 ti-spin"></i>
                     <del>Thêm thành viên mới</del>
@@ -53,7 +59,7 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-4">
+    <div class="col-xl-4 col-6">
         <div class="demo-inline-spacing mt-3">
             <div class="list-group">
                 <div class="list-group-item bg-secondary text-white fw-bold text-center"><?= session()->get('auth_data')?->name ?></div>
@@ -93,7 +99,9 @@
 <hr class="my-5">
 <div class="row justify-content-xl-center">
     <div class="col-md-12">
-        <?= $contract_table ?>
+        <div class="table-responsive">
+            <?= $contract_table ?>
+        </div>
     </div>
 </div>
 

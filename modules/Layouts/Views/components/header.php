@@ -44,12 +44,12 @@
 
         <nav class="layout-navbar navbar navbar-expand-xl align-items-center bg-navbar-theme" id="layout-navbar">
             <div class="container-xxl">
-                <div class="navbar-brand brand demo d-none d-xl-flex py-0 me-4">
-                    <a href="/" class="brand-link gap-2">
-                <span class="brand-logo demo" style="min-height: 45px">
+                <div class="navbar-brand app-brand demo d-none d-xl-flex py-0 me-4">
+                    <a href="/" class="app-brand-link gap-2">
+                <span class="app-brand-logo demo" style="min-height: 45px">
                   <img src="<?= base_url('public/assets/img/branding/GIOHANG.png') ?>" alt="avatar"
 
-                       height="60"
+                       height="30"
                        width="auto" class="cursor-pointer">
                 </span>
                         <span class="brand-text demo menu-text fw-bold"><?= $this->renderSection('brand_text') ?></span>
