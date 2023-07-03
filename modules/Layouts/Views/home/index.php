@@ -34,7 +34,7 @@
     <div class="col-xl-4 col-6">
         <div class="demo-inline-spacing mt-3">
             <div class="list-group">
-                <div class="list-group-item bg-secondary text-white fw-bold text-center">Dự Án</div>
+                <div class="list-group-item bg-secondary text-white fw-bold text-center">Tools</div>
                 <a href="<?= base_url('/apm/sightseeing') ?>" class="list-group-item list-group-item-action">
                     <i class="ti ti-bed ti-sm me-2"></i>
                     Xem thông tin phòng
@@ -51,10 +51,11 @@
                     <i class="ti ti-calculator ti-sm me-2"></i>
                     Máy tính tiền
                 </a>
-                <a href="" class="list-group-item list-group-item-action">
-                    <i class="ti ti-loader ti-sm me-2 ti-spin"></i>
-                    <del>Thêm thành viên mới</del>
-                </a>
+
+                <?php if(is_admin()): ?>
+                    <a href="<?= base_url('/cf/utilities/calculate-money') ?>" class="list-group-item list-group-item-action">
+                        <i class="ti ti-loader ti-sm me-2 ti-spin"></i>Admin Tools</a>
+                <?php endif;?>
 
             </div>
         </div>
@@ -90,7 +91,6 @@
                 <button type="button" id="submit-logout" class="list-group-item list-group-item-action d-flex justify-content-between">
                     <i class="ti ti-door-exit ti-sm me-2"></i>
                     <span class="text-center">Đăng Xuất</span>
-
                 </button>
             </div>
         </div>

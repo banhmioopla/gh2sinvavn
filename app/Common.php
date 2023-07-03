@@ -69,14 +69,6 @@ if (! function_exists('get_cash_time_from')) {
 }
 
 
-if (! function_exists('is_admin')) {
-    function is_admin($account_id):bool{
-        $config = get_config('list_admin_account_id');
-
-        return in_array($account_id, json_decode($config));
-    }
-}
-
 if (! function_exists('get_admin_pin_code')) {
     function get_admin_pin_code():string{
         return get_config('admin_pin_code');

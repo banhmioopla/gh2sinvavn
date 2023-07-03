@@ -44,14 +44,14 @@ class LibUser
         helper('array');
 
 
-        $where_query =  "ORD(arr_supporter_id) > 0";
+        $where_query =  " ORD(arr_supporter_id) > 0";
         if(!empty($where)){
             $where_query .= " AND {$where}";
         }
 
         $query = /** @lang */ <<<SQL
         SELECT gh_contract.*,  JSON_CONTAINS(JSON_EXTRACT(arr_supporter_id, "$[*]"), '"{$account_id}"') AS in_array 
-        FROM gh_contract WHERE $where_query
+        FROM gh_contract WHERE JSON_CONTAINS(JSON_EXTRACT(arr_supporter_id, "$[*]"), '"{$account_id}"') = '1' AND $where_query
         SQL;
 
         $list_filter_support = $this->GhContract->db->query($query)->getResult();
