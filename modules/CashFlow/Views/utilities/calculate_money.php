@@ -37,7 +37,7 @@
         <div class="row justify-content-center">
             <div class="mb-3 col-6">
                 <label>Chiều cao (cm)</label>
-                <input type="text" min="100" value="100" class="form-control" id="bmi-height">
+                <input type="text" min="100" value="155" class="form-control" id="bmi-height">
             </div>
             <div class="mb-3 col-6">
                 <label>Cân nặng (Kg)</label>
