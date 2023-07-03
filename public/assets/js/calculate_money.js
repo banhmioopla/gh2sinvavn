@@ -52,6 +52,10 @@ $(document).ready(function(){
             status = "<h2 class='text-danger fw-bold'>"+rate+" Thiếu Cân</h2>";
         }
 
+        if(rate < 28) {
+            status = "<h2 class='text-danger fw-bold'>"+rate+" Bạn là con heo :> <strong>Kêu éc éc đi!!!</strong></h2>";
+        }
+
         return {
             rate: rate,
             status:status

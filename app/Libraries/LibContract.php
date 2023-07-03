@@ -26,7 +26,6 @@ class LibContract
     }
 
     public function getPartialAmount($contract_id){
-
     }
 
     public function getTotalSaleAmountAfterCost($contract_id):float{
